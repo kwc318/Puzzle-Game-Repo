@@ -27,8 +27,8 @@ public class PlayerMovement : MonoBehaviour
 		pos2 = P2.transform.position;
 		xspeed = 0;
 		x2speed = 0;
-		yspeed = -0.2f;
-		y2speed = 0.2f;
+		yspeed = -0.5f;
+		y2speed = 0.5f;
 		
 	}
 
@@ -123,12 +123,5 @@ public class PlayerMovement : MonoBehaviour
 		
 	}
 
-	void OnTriggerEnter2D(Collider2D other)
-	{
-		if (other.gameObject.CompareTag("Finish"))
-		{
-			Debug.Log("HIT");
-		}
-	}
 }
 
