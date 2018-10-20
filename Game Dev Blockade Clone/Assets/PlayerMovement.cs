@@ -28,6 +28,8 @@ public class PlayerMovement : MonoBehaviour
 	public Collisionp2 p2script;
 	public bool move;
 	public float losetime;
+	public TextMeshProUGUI p1end;
+	public TextMeshProUGUI p2end;
 	Vector3 pos;
 	Vector3 pos2;
 	Transform tr;
@@ -53,11 +55,11 @@ public class PlayerMovement : MonoBehaviour
 		
 		timer1 -= Time.deltaTime;
 		timer2 -= Time.deltaTime;
-
+		
 		if (timer1 < 0)
 		{
 			pos += new Vector3(xspeed,yspeed,0);
-			timer1 = pause;		
+			timer1 = pause;
 			Instantiate(block, pos - new Vector3(x1,y1,-10), Quaternion.identity);
 		}
 
@@ -169,20 +171,32 @@ public class PlayerMovement : MonoBehaviour
 				P1.transform.rotation = Quaternion.Euler(0,0,270);
 				x1 = 0;
 				y1 = -0.25f;
-				pos = new Vector3(-2,3,0);
+				pos = new Vector3(-3,3,0);
 				yspeed = -0.25f;
 				p1script.win = true;
 				P2.transform.rotation = Quaternion.Euler(0,0,90);
 				x2 = 0;
 				y2 = 0.25f;
-				pos2 = new Vector3(2,-3,0);
+				pos2 = new Vector3(3,-3,0);
 				y2speed = 0.25f;
 				p2script.win = true;
 				losetime = 5;
 				move = true;
+				GameObject[] pblocks = GameObject.FindGameObjectsWithTag("Finish");
+				foreach(GameObject pb in pblocks)
+					GameObject.Destroy(pb);
+				
+				if (p1script.score == 1 || p2script.score == 1)
+				{
+					Debug.Log("Game Over");
+					Destroy(this);
+					Destroy(P1);
+					Destroy(P2);
+					p1end.text = p2script.score.ToString();
+					p2end.text = p1script.score.ToString();
+				}
 			}
 		}
-		
 	}
 
 }

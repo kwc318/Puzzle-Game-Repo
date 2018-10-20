@@ -52,7 +52,7 @@ public class Collisionp2 : MonoBehaviour
 	
 	void OnTriggerEnter2D(Collider2D other)
 	{
-		if (other.gameObject.CompareTag("Finish"))
+		if (other.gameObject.CompareTag("Finish") || other.gameObject.CompareTag("Respawn"))
 		{
 			Debug.Log("HIT");
 			player.move = false;
