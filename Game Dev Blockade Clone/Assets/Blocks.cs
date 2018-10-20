@@ -13,17 +13,22 @@ public class Blocks : MonoBehaviour
 	// Use this for initialization
 	void Start () {
 		
-		for (int i = 0; i < 41; i++)
+		for (int i = 0; i <= 20; i++)
 			
         		{
-        			Instantiate(blocks, new Vector3(6 - i * 0.3f, 4.5f, 0), Quaternion.identity);
-			        Instantiate(blocks, new Vector3(6 - i * 0.3f, -4.5f, 0), Quaternion.identity);       
+        			Instantiate(blocks, new Vector3(6.5f - i * 0.3f, 4.5f, 1), Quaternion.identity);
+			        Instantiate(blocks, new Vector3(-0.5f - i * 0.3f, 4.5f, 1), Quaternion.identity);
         		}
 
-		for (int i = 0; i < 31; i++)
+		for (int i = 0; i <=43; i++)
 		{
-			Instantiate(blocks, new Vector3(6, 4.5f - i * 0.3f, 0), Quaternion.identity);
-			Instantiate(blocks, new Vector3(-6, 4.5f - i * 0.3f, 0), Quaternion.identity);
+			Instantiate(blocks, new Vector3(6.5f - i * 0.3f, -4.5f, 1), Quaternion.identity);       
+		}
+
+		for (int i = 0; i <= 30; i++)
+		{
+			Instantiate(blocks, new Vector3(6.5f, 4.5f - i * 0.3f, 1), Quaternion.identity);
+			Instantiate(blocks, new Vector3(-6.5f, 4.5f - i * 0.3f, 1), Quaternion.identity);
 		}
 	}
 	

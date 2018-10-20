@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 
@@ -17,15 +18,16 @@ public class PlayerMovement : MonoBehaviour
 	private float x2;
 	private float y2;
 	public float speed;
-	public float timer;
+	public float timer1;
+	public float timer2;
 	public float pause;
 	public GameObject P1;
 	public GameObject P2;
 	public GameObject block;
+	public Collisionp1 p1script;
+	public Collisionp2 p2script;
 	public bool move;
-	public Sprite Plose;
-	public Sprite P1move;
-	public Sprite P2move;
+	public float losetime;
 	Vector3 pos;
 	Vector3 pos2;
 	Transform tr;
@@ -43,21 +45,28 @@ public class PlayerMovement : MonoBehaviour
 		x2 = x1;
 		y2 = 0.25f;
 		move = true;
+		timer2 = 0.3f;
 	}
 
 	void Update()
 	{
 		
-		timer -= Time.deltaTime;
+		timer1 -= Time.deltaTime;
+		timer2 -= Time.deltaTime;
 
-		if (timer < 0)
+		if (timer1 < 0)
 		{
 			pos += new Vector3(xspeed,yspeed,0);
-			pos2 += new Vector3(x2speed,y2speed,0);
-			timer = pause;		
+			timer1 = pause;		
 			Instantiate(block, pos - new Vector3(x1,y1,-10), Quaternion.identity);
-			Instantiate(block, pos2 - new Vector3(x2,y2,-10), Quaternion.identity);
 		}
+
+		if (timer2 < 0)
+		{
+			pos2 += new Vector3(x2speed,y2speed,0);
+			timer2 = pause;
+			Instantiate(block, pos2 - new Vector3(x2,y2,-10), Quaternion.identity);
+		}	
 
 		if (Input.GetKeyDown(KeyCode.W) && move == true)
 		{
@@ -151,6 +160,28 @@ public class PlayerMovement : MonoBehaviour
 
 		P1.transform.position = pos;
 		P2.transform.position = pos2;
+
+		if (p1script.win == false || p2script.win == false)
+		{
+			losetime -= Time.deltaTime;
+			if (losetime <= 0)
+			{
+				P1.transform.rotation = Quaternion.Euler(0,0,270);
+				x1 = 0;
+				y1 = -0.25f;
+				pos = new Vector3(-2,3,0);
+				yspeed = -0.25f;
+				p1script.win = true;
+				P2.transform.rotation = Quaternion.Euler(0,0,90);
+				x2 = 0;
+				y2 = 0.25f;
+				pos2 = new Vector3(2,-3,0);
+				y2speed = 0.25f;
+				p2script.win = true;
+				losetime = 5;
+				move = true;
+			}
+		}
 		
 	}
 
