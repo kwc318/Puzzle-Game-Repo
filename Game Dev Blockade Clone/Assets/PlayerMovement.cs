@@ -30,6 +30,9 @@ public class PlayerMovement : MonoBehaviour
 	public float losetime;
 	public TextMeshProUGUI p1end;
 	public TextMeshProUGUI p2end;
+	public TextMeshProUGUI gameover;
+	public AudioSource beep;
+	public AudioSource boop;
 	Vector3 pos;
 	Vector3 pos2;
 	Transform tr;
@@ -56,18 +59,20 @@ public class PlayerMovement : MonoBehaviour
 		timer1 -= Time.deltaTime;
 		timer2 -= Time.deltaTime;
 		
-		if (timer1 < 0)
+		if (timer1 <= 0 && move == true)
 		{
 			pos += new Vector3(xspeed,yspeed,0);
 			timer1 = pause;
 			Instantiate(block, pos - new Vector3(x1,y1,-10), Quaternion.identity);
+			beep.Play();
 		}
 
-		if (timer2 < 0)
+		if (timer2 <= 0 && move == true)
 		{
 			pos2 += new Vector3(x2speed,y2speed,0);
 			timer2 = pause;
 			Instantiate(block, pos2 - new Vector3(x2,y2,-10), Quaternion.identity);
+			boop.Play();
 		}	
 
 		if (Input.GetKeyDown(KeyCode.W) && move == true)
@@ -182,11 +187,12 @@ public class PlayerMovement : MonoBehaviour
 				p2script.win = true;
 				losetime = 5;
 				move = true;
+				timer2 = 0.1f;
 				GameObject[] pblocks = GameObject.FindGameObjectsWithTag("Finish");
 				foreach(GameObject pb in pblocks)
 					GameObject.Destroy(pb);
 				
-				if (p1script.score == 1 || p2script.score == 1)
+				if (p1script.score == 6 || p2script.score == 6)
 				{
 					Debug.Log("Game Over");
 					Destroy(this);
@@ -194,6 +200,7 @@ public class PlayerMovement : MonoBehaviour
 					Destroy(P2);
 					p1end.text = p2script.score.ToString();
 					p2end.text = p1script.score.ToString();
+					gameover.text = "Game\nOver";
 				}
 			}
 		}
