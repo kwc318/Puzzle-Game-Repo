@@ -7,6 +7,7 @@ public class Collisionp2 : MonoBehaviour
 {
 
 	public PlayerMovement player;
+	public Idlescript idle;
 	public Sprite Plose;
 	public Sprite P2move;
 	public float timer;
