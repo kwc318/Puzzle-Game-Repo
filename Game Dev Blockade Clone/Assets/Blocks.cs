@@ -37,7 +37,7 @@ public class Blocks : MonoBehaviour
 		
 		if (Input.GetKey(KeyCode.R))
 		{
-			SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+			SceneManager.LoadScene(sceneName:"Start");
 		}
 	}
 }

@@ -360,7 +360,9 @@ MonoBehaviour:
   m_text: 'BLOCKADE
 
 
-    Press 1 to Start!'
+    Press 1 for Classic
+
+    Press 2 for Adapted'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -428,12 +430,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 0}
-    characterCount: 27
+    characterCount: 49
     spriteCount: 0
-    spaceCount: 5
-    wordCount: 5
+    spaceCount: 9
+    wordCount: 9
     linkCount: 0
-    lineCount: 3
+    lineCount: 4
     pageCount: 1
     materialCount: 1
   m_havePropertiesChanged: 0
